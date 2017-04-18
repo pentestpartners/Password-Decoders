@@ -1,5 +1,9 @@
 Some simple password decoders that I've hacked together whilst onsite.
 
+pwdecoder
+=========
+A generic python plugin runner which contains a host of decodes to put them all in one place. Was written with Python 2.7, but should work with 3. Requires documentation.
+
 decodejenkins.py
 ================
 This will decode credential hashes found in Jenkins config and credentials.xml files. I wrote this as https://github.com/tweksteen/jenkins-decrypt failed to work on the version of Jenkins I was looking at - it appears that some structure changes were put in place in the later versions.
