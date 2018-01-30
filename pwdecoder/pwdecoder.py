@@ -15,7 +15,10 @@ def listplugins():
   print("Author: " + plugin['author'])
   print("Hashes supported:")
   for hash in plugin['hashes']:
-   print(" "+plugin['name']+"."+hash['name'])
+   if plugin['name'] == hash['name']:
+	print (" "+plugin['name'])
+   else:
+    print(" "+plugin['name']+"."+hash['name'])
   print
 
 def initplugins():
