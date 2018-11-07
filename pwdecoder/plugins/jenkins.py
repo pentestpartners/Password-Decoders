@@ -25,22 +25,22 @@ class jenkins(object):
 
  def jenkinsdecode(self, data, options):
   if not options['master']:
-   print "No master key file provided"
+   print("No master key file provided")
    exit(1)
   try:
    master=open(options['master'], "rb").read()
   except:
-   print "Could not open " + options['master']
+   print("Could not open " + options['master'])
    exit(1)
   masterkey=sha256(master).digest()[:16]
 
   if not options['secret']:
-   print "No secrets key file provided"
+   print("No secrets key file provided")
    exit(1)
   try:
    secret=open(options['secret'], "rb").read()
   except:
-   print "Could not open " + options['secret']
+   print("Could not open " + options['secret'])
    exit(1)
  
   # decrypt secret key
@@ -49,16 +49,16 @@ class jenkins(object):
 
   cooked=base64.b64decode(data)
   if cooked[0] != '\x01':
-   print "This does not appear to be a valid hash"
+   print("This does not appear to be a valid hash")
    exit(1)
 
   ivlen=struct.unpack('>i', cooked[1:5])[0]
   if ivlen % 16 != 0:
-   print "iv length needs to be a multiple of 16"
+   print("iv length needs to be a multiple of 16")
    exit(1)
   dlen=struct.unpack('>i', cooked[5:9])[0]
   if dlen % 16 != 0:
-   print "Data length needs to be a multiple of 16"
+   print("Data length needs to be a multiple of 16")
    exit(1)
   
   istart=9

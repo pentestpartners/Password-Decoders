@@ -32,7 +32,7 @@ class juniper(object):
   nib = cref[0:length]
   rest = cref[length:]
   if len(nib) != length:
-   print "Ran out of characters: hit '%s', expecting %s chars" % (nib, length)
+   print("Ran out of characters: hit '%s', expecting %s chars" % (nib, length))
    sys.exit(1)
   return nib, rest
 
@@ -44,7 +44,7 @@ class juniper(object):
  def _gap_decode(self,gaps, dec):
   num = 0
   if len(gaps) != len(dec):
-   print "Nibble and decode size not the same!"
+   print("Nibble and decode size not the same!")
    sys.exit(1)
   for x in range(0, len(gaps)):
    num += gaps[x] * dec[x]
@@ -69,7 +69,7 @@ class juniper(object):
 
  def type9decode(self,data,option):
   if data[:3] != "$9$":
-   print "Does not look like a type 9 hash"
+   print("Does not look like a type 9 hash")
    sys.exit(1)
   
   return self.juniper_decrypt(data)

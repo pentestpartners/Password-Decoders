@@ -16,7 +16,7 @@ def listplugins():
   print("Hashes supported:")
   for hash in plugin['hashes']:
    if plugin['name'] == hash['name']:
-	print (" "+plugin['name'])
+    print (" "+plugin['name'])
    else:
     print(" "+plugin['name']+"."+hash['name'])
   print
@@ -49,17 +49,17 @@ if __name__ == "__main__":
 
  # if options are provided split them up
  if args.options:
-  opts=string.split(args.options,",")
+  opts=args.options.split(",")
   for opt in opts:
-   equals=string.find(opt,'=')
+   equals="".find(opt,'=')
    if equals > 0:
     pluginopts[opt[:equals]]=opt[equals+1:]
    else:
     pluginopts[opt]=True
   
- if string.find(args.type,'.') > 0:
-  typeclass=string.split(args.type, '.')[0]
-  typehash=string.split(args.type, '.')[1]
+ if args.type.find('.') > 0:
+  typeclass=args.type.split('.')[0]
+  typehash=args.type.split('.')[1]
  else:
   typeclass=typehash=args.type
  
@@ -73,4 +73,4 @@ if __name__ == "__main__":
      typefound=1
 
  if not typefound:
-  print "Unknown hash type: " + args.type + " (expanded as " + typeclass + "." + typehash + ")"
+  print("Unknown hash type: %s (expanded as %s.%s)" % (args.type, typeclass, typehash))

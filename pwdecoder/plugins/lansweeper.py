@@ -30,25 +30,25 @@ class lansweeper(object):
   return "".join(xor)
 
  def xtea_encrypt(self,key,block,n=32,endian="!"):
-  v0,v1 = struct.unpack(endian+"2L",block)
-  k = struct.unpack(endian+"4L",key)
-  sum,delta,mask = 0L,0x9e3779b9L,0xffffffffL
+  v0,v1 = struct.unpack(endian+"2",block)
+  k = struct.unpack(endian+"4",key)
+  sum,delta,mask = 0,0x9e3779b9,0xffffffff
   for round in range(n):
    v0 = (v0 + (((v1<<4 ^ v1>>5) + v1) ^ (sum + k[sum & 3]))) & mask
    sum = (sum + delta) & mask
    v1 = (v1 + (((v0<<4 ^ v0>>5) + v0) ^ (sum + k[sum>>11 & 3]))) & mask
-  return struct.pack(endian+"2L",v0,v1)
+  return struct.pack(endian+"2",v0,v1)
 
  def xtea_decrypt(self,key,block,n=32,endian="!"):
-  v0,v1 = struct.unpack(endian+"2L",block)
-  k = struct.unpack(endian+"4L",key)
-  delta,mask = 0x9e3779b9L,0xffffffffL
+  v0,v1 = struct.unpack(endian+"2",block)
+  k = struct.unpack(endian+"4",key)
+  delta,mask = 0x9e3779b9,0xffffffff
   sum = (delta * n) & mask
   for round in range(n):
    v1 = (v1 - (((v0<<4 ^ v0>>5) + v0) ^ (sum + k[sum>>11 & 3]))) & mask
    sum = (sum - delta) & mask
    v0 = (v0 - (((v1<<4 ^ v1>>5) + v1) ^ (sum + k[sum & 3]))) & mask
-  return struct.pack(endian+"2L",v0,v1)
+  return struct.pack(endian+"2",v0,v1)
 
  def makesalt(self):
   key=''

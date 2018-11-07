@@ -22,7 +22,7 @@ class react(object):
 
  def keychaindecode(self, data, options):
   if not options['key']:
-   print "No key provided"
+   print("No key provided")
    exit(1)
  
   key=base64.b64decode(options['key'])
